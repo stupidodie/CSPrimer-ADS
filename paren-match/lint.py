@@ -29,13 +29,15 @@ def pare_match(str):
     for char in str:
         if char in left_pares:
             pares.append(left_pares.index(char))
-        if char in right_pares:
-            if len(pares) == 0:
-                return False
-            else:
-                expected_char = right_pares[pares.pop()]
-                if expected_char != char:
-                    return False
+        if char not in right_pares:
+            continue
+        try:
+            last_value = pares.pop()
+        except IndexError:
+            return False
+        expected_char = right_pares[last_value]
+        if expected_char != char:
+            return False
     return len(pares) == 0
 
 
@@ -47,7 +49,7 @@ def test_matched_cases():
     assert pare_match("{([])}") is True
     assert pare_match("{]") is False
     assert pare_match("({}]") is False
-        
+
     print("All Test passed")
 
 
