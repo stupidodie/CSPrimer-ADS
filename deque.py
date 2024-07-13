@@ -43,9 +43,9 @@ class Deque(object):
             self.size -= 1
             old = self.head
             self.head = self.head.next
-            if self.head is not None:
+            if self.head:
                 self.head.prev = None
-            if self.head is None:
+            else:
                 self.tail = None
             return old.value
         return None
@@ -55,9 +55,9 @@ class Deque(object):
             self.size -= 1
             old = self.tail
             self.tail = self.tail.prev
-            if self.tail is not None:
+            if self.tail:
                 self.tail.next = None
-            if self.tail is None:
+            else:
                 self.head = None
             return old.value
         return None
